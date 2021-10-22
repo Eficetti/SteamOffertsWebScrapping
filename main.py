@@ -22,11 +22,18 @@ price = soup.find_all('div', class_="discount_final_price")
 count = 0
 for i in price:
     if count < 50:
-        titlePrice.append(i.text)
+        number = i.text.replace('ARS$ ', '')
+        numberdot = number.replace('.', '')
+        newNumber = numberdot.replace(',', '.')
+        value = float(newNumber)
+        impuesto = 65 * value / 100
+        value += impuesto
+        newValue ="{:.2f}".format(value)
+        titlePrice.append(newValue)
     else:
         break 
     count += 1
-    
+
 discount = soup.find_all('div', class_="discount_pct")
 count = 0
 for i in discount:
@@ -38,3 +45,4 @@ for i in discount:
 
 df = pd.DataFrame({'Nombre': titleName,'Descuento': discountPrice ,'Precio': titlePrice})
 print(df)
+input('Press enter to close')
