@@ -10,12 +10,14 @@ class Main():
         self.titleName = []
         self.titlePrice = []
         self.discountPrice = []
+        self.total = []
 
     def game(self,etiqueta, clase):
         game = self.soup.find_all(etiqueta, class_=clase)
         count = 0
+        self.total = len(game)
         for i in game:
-            if count < 51:
+            if count < self.total:
                 self.titleName.append(i.text)
             else :
                 break 
@@ -25,7 +27,7 @@ class Main():
         price = self.soup.find_all(etiqueta, class_=clase)
         count = 0
         for i in price:
-            if count < 51:
+            if count < self.total:
                 number = i.text.replace('ARS$ ', '')
                 numberdot = number.replace('.', '')
                 newNumber = numberdot.replace(',', '.')
@@ -42,13 +44,14 @@ class Main():
         discount = self.soup.find_all(etiqueta, class_=clase)
         count = 0
         for i in discount:
-            if count < 51:
+            if count < self.total:
                 self.discountPrice.append(i.text)
             else:
                 break
             count += 1
 
     def printeo(self, name):
+        print(len(self.titleName), len(self.titlePrice), len(self.discountPrice))
         print('                                             ', name)
         print(' ')
         df = pd.DataFrame({'Nombre': self.titleName,'Descuento': self.discountPrice ,'Precio': self.titlePrice})
