@@ -51,7 +51,6 @@ class Main():
             count += 1
 
     def printeo(self, name):
-        print(len(self.titleName), len(self.titlePrice), len(self.discountPrice))
         print('                                             ', name)
         print(' ')
         df = pd.DataFrame({'Nombre': self.titleName,'Descuento': self.discountPrice ,'Precio': self.titlePrice})
