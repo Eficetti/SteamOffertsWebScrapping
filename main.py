@@ -50,10 +50,9 @@ class Main():
                 break
             count += 1
 
-    def printeo(self, name):
-        print(len(self.titleName), len(self.titlePrice), len(self.discountPrice))
+    def show(self, name):
         print('                                             ', name)
-        print(' ')
+        print(' ')    
         df = pd.DataFrame({'Nombre': self.titleName,'Descuento': self.discountPrice ,'Precio': self.titlePrice})
         print(df)
         
@@ -62,7 +61,7 @@ m = Main('https://store.steampowered.com/specials#tab=TopSellers')
 m.game('div', 'tab_item_name')
 m.price('div', 'discount_final_price')
 m.discount('div', 'discount_pct')
-m.printeo('Top Sellers')
+m.show('Top Sellers')
 print('-----------------------------------------------------------------------------------------------------------')
 input('Press enter to close')
 
